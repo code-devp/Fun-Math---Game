@@ -1,0 +1,73 @@
+
+1.about.png   From: http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+2.alienfish.png  From: http://www.publicdomainpictures.net/view-image.php?image=160972&picture=alien-fish Person Name: Piotr Siedlecki License CC0 Public Domain
+
+3. apple.png     From: https://pixabay.com/en/apple-red-fruit-vitamins-healthy-158419/  Person Name: OpenClipArtVectors License CC0 Public Domain
+
+4. bb2.png,blackboard.png  From:https://pixabay.com/en/board-school-blackboard-empty-73496/  Person Name:geralt  License CC0 Public Domain
+
+5. blackfish.png  From: https://pixabay.com/en/fish-funny-cartoon-odd-surprised-33712/ Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+6.  bomb2.png,bomb.png From:https://pixabay.com/en/bomb-fuse-explosive-mine-grenade-147841/  Person name:OpenClipArtVectors License CC0 Public Domain
+
+7.  end.gif  From : https://pixabay.com/en/fireball-explosion-devastation-422748/ ;https://pixabay.com/en/death-skull-stylized-158970/  Authors: geralt , OpenClipArtVectors  License CC0 Public Domain
+
+8. gameover.png Created by myself (using Windows Paint) , prog.bot font  From : http://www.fontspace.com/divide-by-zero/progbot  Person Name : Divide by zero
+
+9.goldfish.png From :https://pixabay.com/en/goldfish-fish-koi-carp-30837/  Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+10. help.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+11. home.png   From:http://opengameart.org/content/underwater-background-0 Author: Voodoo Cactus License CC3.0 Unported
+
+12. landscape.png   From: https://pixabay.com/en/landscape-countryside-fields-nature-409551/  Author: martinme2d License CC0 Public Domain
+
+13. lemon.png  From: https://pixabay.com/en/lemon-yellow-fruits-citrus-foods-576400/  Person name:OpenClipArtVectors License CC0 Public Domain
+
+14. orangefish.png  From: https://pixabay.com/en/fish-gold-gold-fish-cartoon-swim-260709/   Person Name : thatteasedawn   License CC0 Public Domain
+ 
+15. pause.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+16. play.png  From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+17. reset.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+18. scr.png   From:https://pixabay.com/en/chest-coral-gold-ocean-pirate-1300163/    Author:OpenClipartVectors License CC0 Public Domain
+
+19. seahorse.png From : https://pixabay.com/en/seahorse-fish-ocean-animal-313946/   Person Name : stef1377   License CC0 Public Domain
+
+20. seal.png  From :https://pixabay.com/en/seal-animals-aquarium-circus-sea-161264/  Person Name : OpenClipArtVectors License CC0 Public Domain
+
+21. seaweed.png  From : https://pixabay.com/en/seaweed-plant-algae-aquatic-32720/   Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+22. starfish.png  From: http://www.publicdomainpictures.net/view-image.php?image=89250&picture=&jazyk=SE  Person Name : Marina Shemesh License CC0 Public Domain
+
+23. strawberry.png   From : https://pixabay.com/en/strawberry-fruit-berry-red-food-37781/    Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+24. tree2.png  From: https://pixabay.com/en/clip-art-flora-nature-plant-tree-1300586/  Person Name : OpenClipArtVectors License CC0 Public Domain
+
+25. ufo.png   From: http://opengameart.org/content/ufo-enemy-game-character  Author: bevouliin License CC0 Public Domain
+
+26. watermelon.png From:https://pixabay.com/en/fresh-refresh-summertime-watermelon-1299827/    Author:OpenClipArtVectors   License CC0 Public Domain
+
+27. bomb_sound.mp3  From: http://soundbible.com/1983-Atomic-Bomb.html     Author: Sound Explorer License CC Attribution 3.0
+
+28. bubble2.wav   From: http://opengameart.org/content/rpg-sound-pack    Author: artisticdude   License CC0 Public Domain
+
+29. carnivalrides.ogg   From: http://opengameart.org/content/carnival-rides  Author: Ecrivain License CC0 Public Domain
+
+30. flora.ogg   From:http://opengameart.org/content/yellow-flowers-and-tall-mossy-trees   Author:Ecrivain License CC0 Public Domain
+
+31. impact.mp3  From:http://soundbible.com/1773-Strong-Punch.html   Author: Mike Koenig License CC Attribution 3.0
+
+32. music2.ogg  From:http://opengameart.org/content/happy-synths-loop-with-slight-christmas-feeling  Author:Pant0don  License CC0 Public Domain
+
+34. pop.ogg   From: http://opengameart.org/sites/default/files/pop.ogg   Author: farfadet46  License CC0 Public Domain
+
+35. round_end.mp3 From: http://soundbible.com/1823-Winning-Triumphal-Fanfare.html  Author: John Stracke   License CC Attribution 3.0
+
+36. seawaves.mp3  http://soundbible.com/885-Sea-Waves.html  Author: Mike Koenig License CC Attribution 3.0
+
+
+
