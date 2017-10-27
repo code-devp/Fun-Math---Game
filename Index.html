@@ -1,0 +1,1610 @@
+<html>
+
+<head>
+
+<meta name='viewport' content='width = device-width, initial-scale = 1.0, user-scalable = no'/>
+<script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="introtoapps.min.js"></script>
+<script type="text/javascript" src="introtoapps.min1.js"></script>
+<script type="text/javascript" src="introtoapps-april28.min.js"></script>
+
+
+<!--These are the jquery UI libraries-->
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<link href="jquery-ui.min.css" rel="stylesheet">
+
+
+<script type="text/javascript">
+
+
+// These are the global variables used throughout the game.
+  var ans1 = random(0,9);
+  var ans2 = random(0,10);
+  var ans3 = random(20,30);
+  var ans4 = random(40,60);
+  var ans5 = random(15,30);
+  var ans6 = random(0,99);
+  var sum = ans4 + ans5;
+  var mult = (ans1 * ans2) + ans1;
+  var fishNumber = 1;
+  var fruitNumber = 1;
+  var availableWidth = ($(window).width()-200);
+  var spacing = Math.floor( availableWidth/4 );
+  var availableHeight = ($(window).height()-200);
+  var deviceHeight = Math.floor(availableHeight/4);
+  var sealspace= Math.floor(2 * spacing);
+  var seahorsespace= Math.floor(3 * spacing );
+  var alienfishspace= Math.floor(4 * spacing );
+  var starfishspace= Math.floor( 1 * spacing );
+  var bombspace = Math.floor(5 * spacing);
+  var seaweedspace = Math.floor(0 * spacing);
+  var seaspace = Math.floor(5 * spacing);
+  var blackboardspace=Math.floor(1 * deviceHeight );
+  var playerHealth = 100;
+  var applespace = Math.floor(3.2 * deviceHeight );
+  var watermelonspace =Math.floor(1 * deviceHeight );
+  var lemonspace = Math.floor(4 * deviceHeight );
+
+
+
+// This function pauses the game and displays help text when the help section is open.
+  function helpDialog()
+         {
+            $("#helpcontent").dialog();
+            $("#helpcontent").dialog("option","title","Help");
+            var bgMusic = document.getElementById('music1');
+            bgMusic.pause();
+            $("#seahorse").moveTo(null);
+            $("#seal").moveTo(null);
+            $("#starfish").moveTo(null);
+            $("#alienfish").moveTo(null);
+            $(".bomb").moveTo(null);
+            console.log("paused");
+            var sound = document.getElementById('wave1');
+            sound.pause();
+            var bgMusic2 = document.getElementById('music2');
+            bgMusic2.pause();
+            var bgMusic3 = document.getElementById('music3');
+            bgMusic3.pause();
+            $("#bomb3").moveTo(null);
+            $("#bomb4").moveTo(null);
+            $("#bomb5").moveTo(null);
+            $("#lemon").moveTo(null);
+            $("#apple").moveTo(null);
+            $("#watermelon").moveTo(null);
+            $("#bomb2").moveTo(null);
+            $("#goldfish").moveTo(null);
+            $("#orangefish").moveTo(null);
+
+     // This functions prevents the appending of an object to the body when the help section is open.
+            $("body").onTap(function(event)
+              {
+                var sound3 = document.getElementById('bubble');
+                $('.blackfish').remove();
+                sound3.pause();
+                console.log("Tap!");
+                $('.strawberry').remove();
+
+              });
+
+        }  // helpDialog ends here
+
+
+//This function helps to display the About text.
+  function AboutDialog()
+  {
+            $("#aboutcontent").dialog();
+            $("#aboutcontent").dialog("option","title","About");
+
+  }
+
+
+//This function removes or hides all objects when a level ends.
+function LevelEnd()
+{
+      $(".tree").remove();
+      $("#watermelon").remove();
+      $("#apple").remove();
+      $("#lemon").remove();
+      $(".strawberry").remove();
+      $("#bomb3").remove();
+      $("#bomb4").remove();
+      $("#bomb5").remove();
+      $("#bomb2").remove();
+      $("#blackboard2").remove();
+      $(".blackfish").remove();
+      $(".seaweed").remove();
+      $("#goldfish").remove();
+      $("#orangefish").remove();
+      $("#buttonplay2").remove();
+      $("#buttonpause2").remove();
+      $("#buttonplay3").remove();
+      $("#buttonpause3").remove();
+      $("#seal").remove();
+      $(".bomb").remove();
+      $("#starfish").remove();
+      $("#seahorse").remove();
+      $("#alienfish").remove();
+      $(".healthBox").remove();
+      $(".blackboard").remove();
+      $("#buttonPlay1").hide();
+      $("#buttonPause1").hide();
+
+ }
+
+
+
+  /*===================================================================================
+  This function gets Menu objects on the screen when the game is loaded.
+  It also defines what events occur when different levels are loaded.
+  All the 3 levels are wrapped into this function.
+  =====================================================================*/
+  function prepareGame(){
+
+      $("body").append("<div id='board'></div>");
+      $("body").append("<div id='level1' class='level'>Level 1</div>");
+			$("body").append("<div id='level2' class='level'>Level 2</div>");
+			$("body").append("<div id='level3'class='level' style = 'left:70%'>Level 3</div>");
+      $("#level1").css("left","10%");
+			$("#level2").css("left","40%");
+      $("body").append("<div id='footer'>&copy;Ninja Games</div>");
+      $('#footer').show();
+      $(".flame").hide();
+
+
+
+// This function hides other unncessary objects when a level is loaded.
+  function LevelStart()
+		  	{
+
+            $("#about").hide();
+						$("#level2").hide();
+						$("#level3").hide();
+            $("#level1").hide();
+
+	  		}
+
+
+
+
+
+
+/* This function appends Level1 objects to the screen.It defines what happens when certain events
+like on tap occur on certain objects in Level 1*/
+
+    $('#level1').onTap(function()
+
+
+       {
+
+          $('body').css('background-image',"url('image/scr.png')");
+					setTimeout(LevelStart,30);
+          $("body").append("<div id='buttonReset1'class='buttonReset' style = 'right:4%;bottom:5%'></div>");
+          $("body").append("<div id='buttonPlay1'class='buttonPlay' style = 'left:0%;bottom:5%'></div>");
+          $("body").append("<div id='buttonPause1'class='buttonPause' style = 'right:4%;bottom:16%'></div>");
+          $("body").append("<div id='seal' style = 'left:"+sealspace+"px'><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ans1+"</div>");
+          $("body").append("<div id='seahorse' style = 'left:"+seahorsespace+"px'><br>"+ans2+"</div>");
+          $("body").append("<div id='alienfish' style = 'text-align:center;color:white;left:"+alienfishspace+"px'>&nbsp;&nbsp;<br>"+sum+"</div>");
+          $("body").append("<div id='starfish' style = 'text-align:center;color:white;left:"+starfishspace+"px'><br>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+ans3+"</div>");
+          $("body").append("<div id ='bomb1' class='bomb' style = 'font-family:fantasy;color:white;z-index:10;bottom:30%;left:"+bombspace+"px'><br>&nbsp;&nbsp;&nbsp;"+ans6+"</div>");
+          $('.bomb').css('background-image',"url('image/bomb.png')");
+          $("body").append("<div id='bb' class='blackboard' style = 'text-align:center;font-family:sans-serif;color:white;left:33%;top:0;background-size:100px 100px;width:100px;height:100px'><br><br>"+ans4+" + "+ans5+" = ?</br></div>");
+          $('.blackboard').css('background-image',"url('image/blackboard.png')");
+          $("body").append("<div id='healthBox1'class='healthBox' style = 'right:1%;top:3%'>Score: 100</div>");
+          $("body").append("<div id='over1'class='gameover' style ='color:white'>Score: 0</div>");
+          $("#over1").hide();
+          $("#footer").hide();
+
+//This function resets the game on tapping reset button in level1
+          $('#buttonReset1').onTap(function()
+          {
+                  $(".flame").hide();
+                  window.location.reload(true);
+                  console.log("Game resets,page reload");
+          }); //reset ends
+
+
+//This function pauses Level1
+           $('#buttonPause1').onTap(function()
+           {
+                    var sound = document.getElementById('wave1');
+                    sound.pause();
+                    var bgMusic = document.getElementById('music1');
+                    bgMusic.pause();
+                    $("#seahorse").moveTo(null);
+                    $("#seal").moveTo(null);
+                    $("#starfish").moveTo(null);
+                    $("#alienfish").moveTo(null);
+                	  $(".bomb").moveTo(null);
+                    console.log("paused");
+           }); //pause ends
+
+//This function starts the games,makes the onscreen objects move in Level 1
+          $('#buttonPlay1').onTap(function()
+
+        {
+                     var sound = document.getElementById('wave1');
+                     sound.play();
+                     sound.loop=true;
+                     var fail = document.getElementById('gmover');
+                     var sound2 = document.getElementById('pop');
+                     var bgMusic = document.getElementById('music1');
+                     var victory = document.getElementById('win');
+                     victory.volume = 1;
+                     sound2.volume = 1;
+                     bgMusic.volume = 0.5;
+                     bgMusic.play();
+                     bgMusic.loop = true;
+
+
+               //These functions make the objects move and bounce off the walls
+                    $("#seal").moveTo(90);
+                    $("#seal").speed(0.3);
+                    $("#seal").autoBounceOff(true);
+                    $("#seahorse").moveTo(90);
+                    $("#seahorse").speed(0.3);
+                    $("#seahorse").autoBounceOff(true);
+                    $("#alienfish").moveTo(90);
+                    $("#alienfish").speed(0.4);
+                    $("#alienfish").autoBounceOff(true);
+                    $("#starfish").moveTo(90);
+                    $("#starfish").speed(0.3);
+                    $("#starfish").autoBounceOff(true);
+                    $("#bomb1").moveTo(90);
+                    $("#bomb1").speed(0.3);
+                    $("#bomb1").autoBounceOff(true);
+
+              //These functions make sure the objects are not removed from the screen
+                    $("#seal").autoRemoveOffScreen(false);
+                    $("#seahorse").autoRemoveOffScreen(false);
+                    $("#alienfish").autoRemoveOffScreen(false);
+                    $("#starfish").autoRemoveOffScreen(false);
+
+
+        //This function removes the starfish object from the screen when tapped and updates the score.Also shows an alert.
+                  $("#starfish").onTap(function() {
+
+                     sound2.play();
+                     $("#starfish").remove();
+                     setTimeout(onAlarmGoingOff, 500);
+                     alert("Wrong Answer");
+
+                  });
+
+            //This function ends the game when the bomb object is tapped.
+                  $(".bomb").onTap(function()
+                      {
+                            bgMusic.pause();
+                            sound.pause();
+                            fail.play();
+                            LevelEnd();
+                            $(".flame").show();
+                            $("#over1").show();
+                            alert("Gameover!");
+                            alert("Tap Reset button to return to Menu");
+
+                      	});
+
+
+                      $("#seal").onTap(function()
+
+                         {
+                              sound2.play();
+                            	$("#seal").remove();
+                              setTimeout(onAlarmGoingOff, 500);
+                              alert("Wrong Answer");
+                         });
+
+                      $("#seahorse").onTap(function()
+                       {
+                          sound2.play();
+                      	  $("#seahorse").remove();
+                          setTimeout(onAlarmGoingOff, 500);
+                          alert("Wrong Answer");
+                      });
+
+
+
+
+                       $("#alienfish").onTap(function()
+
+                       {   bgMusic.pause();
+                           sound.pause();
+                           victory.play();
+                           alert("Correct Answer! Level 1 Complete!");
+                           LevelEnd();
+
+                        });
+
+
+
+          });  // ontap Play1 end
+
+
+  }); // Level 1  ends
+
+
+
+
+
+/*===================================================================================================
+This function loads level2 objects,music onto the screen.It also defines the play,pause and reset functions.
+All level 2 functions are wrapped into this function
+=====================================================================================================*/
+    $('#level2').onTap(function()
+
+    {
+              var sound = document.getElementById('wave1');
+              sound.play();
+              var bgMusic2 = document.getElementById('music2');
+              setTimeout(LevelStart,70);
+              $("#footer").remove();
+              $("#level2").hide();
+        			$("#level3").hide();
+        			$("#level1").hide();
+              $('#leftwall').show();
+              $('#rightwall').show();
+              $('#leftwall').css('z-index',"20");
+              $('#rightwall').css('z-index',"20");
+              $('body').css('background-image',"url('image/scr.png')");
+              $("body").append("<div id='healthBox2'class='healthBox' style = 'right:1%;top:3%'>Score: 100</div>");
+              $("body").append("<div id='buttonreset2' class='buttonReset' style = 'right:4%;bottom:5%'></div>");
+              $("body").append("<div id='buttonplay2' class='buttonPlay' style = 'left:0%;bottom:5%'></div>");
+              $("body").append("<div id='buttonpause2' class='buttonPause' style = 'right:4%;bottom:16%'></div>");
+              $("body").append("<div id='goldfish' style = 'left:"+sealspace+"px'></div>");
+              $("body").append("<div id='orangefish' style = 'left:"+starfishspace+"px;top:40%'></div>");
+              $("body").append("<div id='one'class='seaweed' style = 'left:"+seaweedspace+"px'></div>");
+              $("body").append("<div id='two'class='seaweed' style = 'left:75%'></div>");
+              $("body").append("<div id='three'class='seaweed' style = 'left:"+seaweedspace+"px;top:40%'></div>");
+              $("body").append("<div id='four'class='seaweed' style = 'left:75%;top:40%'></div>");
+              $("body").append("<div id='bomb2'class='bomb' style = 'left:0%;top:60%'></div>");
+              $('.bomb').css('background-image',"url('image/bomb2.png')");
+              $("body").append("<div id='bb2' class='blackboard' style = 'left:33%;top:0;background-size:100px 71px;width:100px;height:71px'></div>");
+              $('.blackboard').css('background-image',"url('image/bb2.png')");
+              $("body").append("<div id='over2'class='gameover' style ='color:white'>Score: 0</div>");
+              $("#over2").hide();
+
+
+//This function resets the game on tapping reset button in level 2
+              $('#buttonreset2').onTap(function()
+
+              {
+
+                              window.location.reload(true);
+                              console.log("Game resets,page reload");
+              });
+
+//This function pauses level2.
+               $('#buttonpause2').onTap(function()
+               {
+                              var sound = document.getElementById('wave1');
+                              sound.pause();
+                              bgMusic2.pause();
+                              $('.blackfish').remove();
+                              $("#bomb2").moveTo(null);
+                              $("#goldfish").moveTo(null);
+                              $("#orangefish").moveTo(null);
+                              console.log("Game paused");
+                });
+
+
+
+//This function starts level2.
+                $('#buttonplay2').onTap(function()
+
+                {
+                                var bgMusic2 = document.getElementById('music2');
+                                var victory = document.getElementById('win');
+                                var impact = document.getElementById('collide');
+                                bgMusic2.play();
+                                bgMusic2.volume = 0.4;
+                                var sound = document.getElementById('wave1');
+                                sound.play();
+                                sound.loop=true;
+                                var sound3 = document.getElementById('bubble');
+                                //These function moves the level 2 objects and bounce them off other objects on screen.
+                                $("#orangefish").moveTo(90);
+                                $("#orangefish").speed(0.3);
+                                $("#orangefish").autoBounceOff(true);
+                                $("#bomb2").moveTo(90);
+                                $("#bomb2").speed(0.5);
+                                $("#bomb2").autoBounceOff(true);
+                                $("#goldfish").moveTo(90);
+                                $("#goldfish").speed(0.6);
+                                $("#goldfish").autoBounceOff(true);
+          //This function appends a fish to the screen and move it upwards every time the body is tapped.
+                                $("body").onTap(function(event)
+                               {
+                                           sound3.play();
+                                           console.log("Tap!");
+
+                                           $("body").append("<div id='fish"+fishNumber+"' class='blackfish'> </div> ");
+                                           $('#fish'+fishNumber).moveTo(0);
+                                           $('#fish'+fishNumber).speed(0.3);
+                                           $('#fish'+fishNumber).css("bottom","0px");
+                                           $('#fish'+fishNumber).css("left",event.clientX + "px");
+
+                                           console.log(+fishNumber);
+
+                                           fishNumber++;
+
+                               });
+
+             //this function ends the level when a collision occurs with goldfish.
+                                  $("#goldfish").onCollision(function(otherObject)
+                                  {
+
+                                       if (otherObject.hasClass("blackfish"))
+                                       {
+                                                    bgMusic2.pause();
+                                                    impact.play();
+                                                    victory.play();
+                                                    alert("Correct Answer!Level 2 Completed!")
+                                                    alert("Tap Reset to enter Menu again")
+                                                    setTimeout(LevelEnd,10);
+
+
+                                        }
+                              });    //oncollision ends
+
+
+//This function updates the score when collision occurs
+                                  $("#orangefish").onCollision(function(otherObject)
+                                  {
+                                          if (otherObject.hasClass("blackfish"))
+                                          {
+                                                    bgMusic2.pause();
+                                                    impact.play();
+                                                    bgMusic2.play();
+                                                    $('.blackfish').remove();
+                                                    setTimeout(onAlarmGoingOff,2);
+                                                    alert("Wrong answer!")
+
+
+                                          }
+                                });
+
+
+//This function ends the level,shows gameover alert when collision occurs with bomb
+                                  $("#bomb2").onCollision(function(otherObject)
+                                  {
+
+                                          if (otherObject.hasClass("blackfish"))
+
+                                          {
+                                                    impact.play();
+                                                    alert("Gameover!");
+                                                    bgMusic2.pause();
+                                                    alert("Tap Reset button to return to Menu");
+                                                    $(".flame").show();
+                                                    LevelEnd();
+                                                    setTimeout(Score,30);
+                                                    $("#over2").show();
+                                                    var fail = document.getElementById('gmover');
+                                                    fail.play();
+
+                                           }
+                                   });
+
+
+                 });  // ontap play2 ends here
+
+	}); // level 2 ends here
+
+
+
+//this function loads level 3 objects,music onto the screen.Also defines level 3 play,pause functions
+      $('#level3').onTap(function()
+
+           {
+
+                   setTimeout(LevelStart,10);
+                   var sound = document.getElementById('wave1');
+                   var bgMusic3 = document.getElementById('music3');
+                   sound.pause();
+                   $("#footer").remove();
+                   $("#level2").hide();
+                   $("#level3").hide();
+                   $("#level1").hide();
+                   $("#leftwall").remove();
+                   $("#rightwall").remove();
+                   $('body').css('background-image',"url('image/landscape.png')");
+                   $("body").append("<div id='buttonreset3' class='buttonReset' style = 'right:4%;bottom:5%'></div>");
+                   $("body").append("<div id='buttonplay3' class='buttonPlay' style = 'left:0%;bottom:5%'></div>");
+                   $("body").append("<div id='buttonpause3' class='buttonPause' style = 'right:4%;bottom:16%'></div>");
+                   $("body").append("<div id='one'class='tree' style = 'left:14%;bottom:5%'></div>");
+                   $("body").append("<div id='two'class='tree' style = 'left:71%;bottom:5%'></div>");
+                   $("body").append("<div id='three'class='tree' style = 'left:7%;bottom: 20%'></div>");
+                   $("body").append("<div id='four'class='tree' style = 'left:78%;bottom:20%'></div>");
+                   $("body").append("<div id='five'class='tree' style = 'background-size:20px 90%;width:20px;height:70%;left:"+seaweedspace+"px;bottom:30%'></div>");
+                   $("body").append("<div id='six'class='tree' style = 'background-size:20px 90%;width:20px;height:70%;left:87%;bottom:30%'></div>");
+                   $("body").append("<div id='apple' style = 'font-size:18;color:white;left:30%;top:25%'><br>&nbsp;&nbsp;&nbsp;&nbsp;"+ans2+"</br></div>");
+                   $("body").append("<div id='watermelon' style = 'font-size:20;color:white;left:40%;top:10%'>&nbsp;&nbsp;&nbsp;&nbsp;"+mult+"</div>");
+                   $("body").append("<div id='lemon' style ='font-size:16;font-weight:900;color:white;left:19%;top:"+lemonspace+"px'><br>&nbsp;&nbsp;&nbsp;&nbsp;"+ans3+"</br></div>");
+                   $("body").append("<div id='bb3' class='blackboard' style = 'font-family:monospace;font-size:16;text-align:center;color:white;left:35%;top:0;background-size:100px 35px;width:100px;height:35px'>["+ans1+"X"+ans2+"] + "+ans1+"</div>");
+                   $('#bb3').css('background-image',"url('image/blackboard.png')");
+                   $("body").append("<div id='bomb3' class='bomb' style = 'left:10%;top:10%'></div>");
+                   $('#bomb3').css('background-image',"url('image/ufo.png')");
+                   $("body").append("<div id='bomb4' class='bomb' style = 'font-weight:900;background-size:60px 50px;width:60px;color:white;left:5%;top:25%'><br>&nbsp;&nbsp;&nbsp;&nbsp;"+ans2+"</br></div>");
+                   $('#bomb4').css('background-image',"url('image/bomb.png')");
+                   $("body").append("<div id='bomb5' class='bomb' style = 'color:white;left:45%;top:"+lemonspace+"px'><br>&nbsp;&nbsp;&nbsp;"+ans1+"</br></div>");
+                   $('#bomb5').css('background-image',"url('image/bomb.png')");
+                   $("body").append("<div id='over3'class='gameover' style ='color:white'>Score: 0</div>");
+                   $("#over3").hide();
+
+                   $('#buttonreset3').onTap(function()
+                   {
+//This function resets the game on tapping reset button in level3
+                             window.location.reload(true);
+                             console.log("Game resets,page reload");
+                   });
+
+
+                  $('#buttonpause3').onTap(function()
+                  {
+                             var sound = document.getElementById('wave1');
+                             sound.pause();
+                             bgMusic3.pause();
+                             $('.strawberry').remove();
+                             $("#bomb3").moveTo(null);
+                             $("#bomb4").moveTo(null);
+                             $("#bomb5").moveTo(null);
+                             $("#lemon").moveTo(null);
+                             $("#apple").moveTo(null);
+                             $("#watermelon").moveTo(null);
+                             console.log("Game paused");
+                  });
+
+//This function starts level 3.
+                  $('#buttonplay3').onTap(function()
+                  {
+
+                           $("p1").hide();
+                           $("body").append("<div id='healthBox3'class='healthBox' style = 'right:1%;top:-1.5%'>Score: 100</div>");
+                           var victory = document.getElementById('win');
+                           var fail = document.getElementById('gmover');
+                           var impact = document.getElementById('collide');
+                           var bgMusic3 = document.getElementById('music3');
+                           bgMusic3.play();
+                           var sound3 = document.getElementById('bubble');
+//These function make the objects move and bounce off other object on screen like trees.
+                           $("#apple").moveTo(90);
+                           $("#apple").speed(0.5);
+                           $("#apple").autoBounceOff(true);
+                           $("#watermelon").moveTo(90);
+                           $("#watermelon").speed(0.5);
+                           $("#watermelon").autoBounceOff(true);
+                           $("#lemon").moveTo(90);
+                           $("#lemon").speed(0.1);
+                           $("#lemon").autoBounceOff(true);
+                           $("#bomb3").moveTo(90);
+                           $("#bomb3").speed(0.5);
+                           $("#bomb3").autoBounceOff(true);
+                           $("#bomb4").moveTo(90);
+                           $("#bomb4").speed(0.5);
+                           $("#bomb4").autoBounceOff(true);
+                           $("#bomb5").moveTo(90);
+                           $("#bomb5").speed(0.1);
+                           $("#bomb5").autoBounceOff(true);
+
+//This function ends the level when collision occurs with watermelon object.
+                           $("#watermelon").onCollision(function(otherObject)
+                             {
+                                       if (otherObject.hasClass("strawberry"))
+                                       {
+                                             bgMusic3.pause();
+                                             impact.play();
+                                             victory.play();
+                                             $('.strawberry').remove();
+                                             $("#bomb3").moveTo(null);
+                                             $("#bomb4").moveTo(null);
+                                             $("#bomb5").moveTo(null);
+                                             $("#lemon").moveTo(null);
+                                             $("#apple").moveTo(null);
+                                             $("#watermelon").moveTo(null);
+                                             alert("Correct Answer!Level 3 Completed!")
+                                             alert("Tap Reset to enter Menu again")
+                                             setTimeout(LevelEnd,30);
+
+
+                                       }// if ends
+                            }); // collision ends
+
+
+//This function ends the level when collision occurs with apple object.
+                         $("#apple").onCollision(function(otherObject)
+                                    {
+                                          if (otherObject.hasClass("strawberry"))
+                                          {
+                                                      bgMusic3.pause();
+                                                      impact.play();
+                                                      setTimeout(Score,10);
+                                                      $('.strawberry').remove();
+                                                      $("#bomb3").moveTo(null);
+                                                      $("#bomb4").moveTo(null);
+                                                      $("#bomb5").moveTo(null);
+                                                      $("#lemon").moveTo(null);
+                                                      $("#apple").moveTo(null);
+                                                      $("#watermelon").moveTo(null);
+                                                      setTimeout(LevelEnd,10);
+                                                      alert("Wrong answer!")
+                                                      alert("Tap Reset to enter Menu again")
+
+                                        }
+                                 });
+
+//This function ends the level when collision occurs with lemon object.
+                        $("#lemon").onCollision(function(otherObject)
+                                          {
+                                                  if (otherObject.hasClass("strawberry"))
+                                                  {
+                                                    bgMusic3.pause();
+                                                    impact.play();
+                                                    setTimeout(Score,0.3);
+                                                    $('.strawberry').remove();
+                                                    $("#bomb3").moveTo(null);
+                                                    $("#bomb4").moveTo(null);
+                                                    $("#bomb5").moveTo(null);
+                                                    $("#lemon").moveTo(null);
+                                                    $("#apple").moveTo(null);
+                                                    $("#watermelon").moveTo(null);
+                                                    setTimeout(LevelEnd,5);
+                                                    alert("Wrong answer!")
+                                                    alert("Tap Reset to enter Menu again")
+                                                 }
+                                        });
+
+//This function ends the level when collision occurs with bomb5 object.
+                        $("#bomb5").onCollision(function(otherObject)
+                        {
+                                   var fail = document.getElementById('gmover');
+                                    if (otherObject.hasClass("strawberry"))
+                                    {
+                                                      bgMusic3.pause();
+                                                      impact.play();
+                                                      fail.play();
+                                                      setTimeout(Score,0.3);
+                                                      $('.strawberry').remove();
+                                                      $("#bomb3").moveTo(null);
+                                                      $("#bomb4").moveTo(null);
+                                                      $("#bomb5").moveTo(null);
+                                                      $("#lemon").moveTo(null);
+                                                      $("#apple").moveTo(null);
+                                                      $("#watermelon").moveTo(null);
+                                                      setTimeout(LevelEnd,20);
+                                                      $(".flame").show();
+                                                      alert("Gameover!Tap Reset button to return to Menu");
+                                                      alert("Tap Reset to enter Menu again")
+                                                      $("#over3").show();
+
+                                    }
+                     });
+
+
+//This function ends the level when collision occurs with bomb3 object.
+                    $("#bomb3").onCollision(function(otherObject)
+
+                    {
+
+                          var fail = document.getElementById('gmover');
+                          if (otherObject.hasClass("strawberry"))
+                          {
+                                                  bgMusic3.pause();
+                                                  impact.play();
+                                                  setTimeout(Score,0.3);
+                                                  alert("Gameover!");
+                                                  alert("Tap Reset button to return to Menu");
+                                                  $(".flame").show();
+                                                  LevelEnd();
+                                                  $("#over3").show();
+                                                  fail.play();
+                          }
+                    });
+
+
+
+//This function ends the level when collision occurs with bomb4 object.
+                    $("#bomb4").onCollision(function(otherObject)
+                   {
+                              if (otherObject.hasClass("strawberry"))
+                              {
+                                                 bgMusic3.pause();
+                                                 impact.play();
+                                                 setTimeout(Score,0.3);
+                                                 alert("Gameover!");
+                                                 alert("Tap Reset button to return to Menu");
+                                                 $(".flame").show();
+                                                 LevelEnd();
+                                                 $("#over3").show();
+                                                 fail.play();
+
+
+
+                          }
+                   });
+
+
+
+
+
+//This functions appends a strawberry each time the sxreen is tapped and moves it upwards.
+                   $("body").onTap(function(event)
+                   {
+                                         sound3.play();
+                                         console.log("Tap!");
+                                         $("body").append("<div id='fruit"+fruitNumber+"' class='strawberry'> </div> ");
+                                         $('#fruit'+fruitNumber).moveTo(0);
+                                         $('#fruit'+fruitNumber).speed(1);
+                                         $('#fruit'+fruitNumber).css("bottom","0px");
+                                         $('#fruit'+fruitNumber).css("left",event.clientX + "px");
+
+                                         console.log(+fruitNumber);
+
+                                         fruitNumber++;
+
+                  });
+
+
+            }); //ontap play3 ends
+      }); // level 3 ends here
+
+  } //preparegame function ends here
+
+
+
+
+
+
+//This function reduces the player health or score by 20 everytime that its called.
+//It ends the game if the score is less than 60.
+        function onAlarmGoingOff()
+        {
+
+
+                playerHealth = playerHealth - 20;
+                $(".healthBox").html(playerHealth);
+                console.log("alarm");
+                      if(playerHealth <= 60)
+                      {
+                          	alert("You Lose! Gameover! ")
+                          	setTimeout(LevelEnd,200);
+                          	alert("Tap Reset button to return to Menu");
+                       }
+
+        }
+
+//This function changes the score to zero everytime its called.
+        function Score()
+        {
+
+
+                playerHealth = playerHealth - 100;
+               $(".healthBox").html(playerHealth);
+               console.log("score change");
+
+
+        }
+
+
+
+
+
+  //this function adjusts and resizes the objects on screen evertime the window is resized
+        function adjustWindow()
+        {
+
+               var scale = Math.floor( spacing/70);
+               $("#seal").css("transform","scale("+scale+")");
+               $("#seahorse").css("transform","scale("+scale+")");
+               $("#starfish").css("transform","scale("+scale+")");
+               $("#alienfish").css("transform","scale("+scale+")");
+               $(".blackboard").css("transform","scale("+scale+")");
+               $("#starfish").each(function()
+               {
+                      var x = $(this).position().left;
+                        if (x>= (availableWidth-100))
+                        {
+                              $(this).css("left",(availableWidth-100)+"px");
+                            }
+              });
+
+              $("#seal").each(function()
+              {
+                       var x = $(this).position().left;
+                       if (x>= (availableWidth-100))
+                       {
+                              $(this).css("left",(availableWidth-100)+"px");
+                      }
+              });
+
+
+              $("#seahorse").each(function()
+              {
+                    var x = $(this).position().left;
+                    if (x>= (availableWidth-100))
+                    {
+                            $(this).css("left",(availableWidth-100)+"px");
+                    }
+              });
+
+
+              $("#alienfish").each(function()
+              {
+                        var x = $(this).position().left;
+                        if (x>= (availableWidth-100))
+                        {
+                                  $(this).css("left",(availableWidth-100)+"px");
+                        }
+            });
+
+       }    //  adjust window ends here
+
+
+
+//This function loads the game when the entire document is ready.
+    $(document).ready(function()
+
+            {
+                $(window).load(function()
+                      {
+
+                                  var sound = document.getElementById('wave1');
+                                  sound.play();
+                                  sound.loop = true;
+                                  prepareGame();
+              	                  console.log("Game prepared");
+
+                      });
+
+
+
+                $(window).resize(function()
+                    {
+                                adjustWindow();
+                                console.log("resized");
+
+
+                    });
+
+
+          });  // ready ends here
+
+
+
+
+
+
+</script>
+
+
+
+<style type='text/css'>
+
+
+/*This applies a background image to the whole body of the window */
+
+body
+{
+  top:0px;
+  left:0px;
+  background-image:url('image/home.png');
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+	animation-name: PageSlide;
+	animation-duration: 4s;
+	animation-iteration-count:1;
+	animation-timing-function: linear;
+  z-index:10;
+
+}
+
+@keyframes PageSlide{
+
+  0%{ left:-900px;}
+  100% {left:1vw;}
+}
+
+
+
+
+/*adjusts width and height of app according to browser width and height*/
+
+@media screen and  (max-width:667px){
+
+body{
+width:100%;
+height:100%;
+}
+
+
+
+}
+
+@media screen and  (max-width:1024px){
+
+body{
+width:100%;
+height:100%;
+}
+}
+
+.flame{
+
+  background-size: 100% 120%;
+  display: block;
+  background-image: url("image/end.gif");
+  width: 100%;
+  height: 105%;
+  position: absolute;
+  top: -6%;
+  left: -1%;
+}
+
+
+#seal{
+  background-image: url('image/seal.png');
+  background-size: 70px 70px;
+	width: 70px;
+	height: 70px;
+  position:absolute;
+	z-index: 10;
+	bottom: 50%;
+  font-family:fantasy;
+  text-align:center;
+  color:white;
+}
+
+#seahorse
+{
+  background-image: url('image/seahorse.png');
+  background-size: 70px 70px;
+  width: 70px;
+  height: 70px;
+  position:absolute;
+  z-index: 10;
+  bottom:30%;
+  text-align:center;
+  color:white;
+  font-family: fantasy;
+  font-size: larger;
+}
+
+
+
+#starfish{
+  background-image: url('image/starfish.png');
+  background-size: 70px 90px;
+  width: 70px;
+  height: 90px;
+  position:absolute;
+  z-index: 10;
+  bottom:20%;
+  font-family: fantasy;
+
+}
+
+
+
+#alienfish
+{
+
+  background-image: url('image/alienfish.png');
+  background-size: 100px 70px;
+  width: 100px;
+  height: 70px;
+  position:absolute;
+  z-index: 10;
+  bottom:40%;
+  font-family: fantasy;
+  font-size: medium;
+
+}
+
+.bomb
+
+{
+
+	  background-size: 50px 50px;
+	  width: 50px;
+	  height: 50px;
+	  position:absolute;
+    z-index: 20;
+
+
+	}
+
+
+
+
+
+
+
+#goldfish
+{
+	background-image: url('image/goldfish.png');
+	background-size: 70px 70px;
+	width: 70px;
+	height: 70px;
+	position:absolute;
+	z-index: 20;
+  top:20%;
+
+}
+
+#orangefish
+{
+  background-image: url('image/orangefish.png');
+  background-size: 70px 70px;
+  width: 70px;
+  height: 70px;
+  position:absolute;
+  z-index: 20;
+  top:20%;
+}
+
+
+.blackfish
+{
+  background-image: url('image/blackfish.png');
+  background-size: 70px 70px;
+  width: 70px;
+  height: 70px;
+  position:absolute;
+  z-index: 20;
+
+}
+
+.seaweed
+{
+  background-image: url('image/seaweed.png');
+  background-size: 70px 70px;
+  width: 70px;
+  height: 70px;
+  position:absolute;
+  z-index:20;
+  top:20%;
+}
+
+.tree
+{
+
+  background-image: url('image/tree2.png');
+  background-size: 20px 200px;
+  width: 20px;
+  height: 200px;
+  position:absolute;
+  z-index:10;
+  z-index:20;
+  bottom:20%;
+
+}
+
+
+#apple
+
+{
+  background-image: url('image/apple.png');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  position:absolute;
+  z-index: 20;
+  bottom:
+}
+
+
+#watermelon
+
+{
+
+  background-image: url('image/watermelon.png');
+  background-size: 70px 31px;
+  width: 70px;
+  height: 31px;
+  position:absolute;
+  z-index: 20;
+  top:29%;
+}
+
+
+
+#lemon
+
+{
+
+  background-image: url('image/lemon.png');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  position:absolute;
+  z-index: 20;
+
+
+}
+
+.strawberry{
+  background-image: url('image/strawberry.png');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  position:absolute;
+  z-index: 20;
+}
+
+
+
+.blackboard
+{
+position: fixed;
+z-index: 10;
+}
+
+
+
+  p1 {
+		z-index: 10;
+    position: absolute;
+    right: 1%;
+    width: 140px;
+    padding: 0px 0px;
+    color: #171616;
+    background-color: #FFFDFD;
+    border-radius: 0;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight:600;
+    text-align: center;
+    font-variant: small-caps;
+}
+
+
+.healthBox{
+    	 z-index:10;
+      position: absolute;
+      width: 100px;
+      height: 20px;
+      padding: 1px 1px;
+      color: red;
+      background-color: yellow;
+      border-radius: 0;
+      font-size: 15px;
+      font-family: sans-serif;
+      font-weight: 600;
+      text-align: center;
+      font-variant: small-caps;
+
+}
+
+.level{
+
+  	      position: absolute;
+  	      top: 70%;
+          width: 80px;
+    	    z-index:10;
+    	    padding: 2px 2px;
+    			color: #9C27B0;
+          background-color: #E6B6EF;
+    	    border-radius: 0;
+    	    font-size: 20px;
+    	    font-family: fantasy;
+    	    text-align: center;
+    	    font-variant: small-caps;
+    	    border-radius: 20px;
+    	    cursor: pointer;
+    	    box-shadow: 0 6px #03A9F4;
+
+}
+
+
+.buttonReset
+{
+   background-image: url('image/reset.png');
+   background-size: 50px 50px;
+   width: 50px;
+   height: 50px;
+   position:absolute;
+   z-index: 30;
+}
+
+
+.buttonPause
+{
+   background-image: url('image/pause.png');
+   background-size: 50px 50px;
+   width: 50px;
+   height: 50px;
+   position:absolute;
+   z-index: 30;
+}
+
+/*Creates a Play button*/
+.buttonPlay
+{
+   background-image: url('image/play.png');
+   background-size: 50px 50px;
+   width: 50px;
+   height: 50px;
+   position:absolute;
+   z-index: 30;
+
+  }
+
+
+
+
+
+#footer {
+
+    font-weight:bold;
+    color: #2830AD;
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    display: inline-block;
+    border-width: 1px;
+    border-color: #151516;
+    border-style: solid;
+    border-radius: 16px;
+    padding: 10px 4px;
+    z-index: 10;
+  }
+
+
+
+
+
+
+
+
+
+
+
+/*Creates animation for the different buttons*/
+
+#buttonPlay1:active
+ {
+  background-color: rgb(3, 169, 244);
+
+  transform: translateY(4px);
+}
+
+#buttonplay2:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#buttonplay3:active
+{
+background-color:rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#buttonReset1:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+
+#buttonreset2:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#buttonreset3:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#buttonPause1:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#buttonpause2:active
+ {
+background-color: rgb(3, 169, 244);
+transform: translateY(4px);
+}
+
+#buttonpause3:active
+ {
+background-color:rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#level1:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+#level2:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+
+
+#level3:active
+{
+background-color: rgb(3, 169, 244);
+
+transform: translateY(4px);
+}
+
+
+#leftwall
+{
+  top:0px;
+  left:0px;
+  width:0px;
+  background-color: black;
+  z-index: 10;
+  position: absolute;
+  height:100vh;
+}
+
+#rightwall
+
+{
+
+  top:0px;
+  right:0px;
+  width:0px;
+  background-color: black;
+  z-index: 10;
+  position:fixed;
+  height:100vh;
+}
+
+
+
+.gameover {
+    background-image: url(image/gameover.png);
+    background-size: 100px 100px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 10;
+    animation-name: move;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: absolute;
+
+}
+
+@keyframes move{
+
+
+0% {
+    left: 50px;
+  }
+
+
+100% {
+    left: 1000px;
+}
+
+}
+
+
+
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+    <div id="leftwall"></div>
+    <div id="rightwall"></div>
+    <div class="flame"></div>
+    <p1> Nupura Pantina,215308953 </p1>
+
+
+
+<audio id="music1"><source src="sounds/carnivalrides.ogg" type="audio/mpeg"></audio>
+<audio id="wave1"><source src="sounds/seawaves.mp3" type="audio/mpeg"></audio>
+<audio id="win"><source src="sounds/round_end.mp3" type="audio/mpeg"></audio>
+<audio id="gmover"><source src="sounds/bomb_sound.mp3" type="audio/mpeg"></audio>
+<audio id="music2"><source src="sounds/music2.ogg" type="audio/mpeg"></audio>
+<audio id="music3"><source src="sounds/flora.ogg" type="audio/mpeg"></audio>
+<audio id="bubble"><source src="sounds/bubble2.wav" type="audio/mpeg"></audio>
+<audio id="pop"><source src="sounds/pop.ogg" type="audio/mpeg"></audio>
+<audio id="collide"><source src="sounds/impact.mp3" type="audio/mpeg"></audio>
+
+<!-- Creates help button and displays help text-->
+<button id="help" onclick ="helpDialog()" style="border-width: 0;
+border-style: outset;
+border-color: buttonface;
+background-size: 50px 50px;
+z-index:30;
+width: 50px;
+height: 50px;
+background-color: rgba(210, 105, 30, 0.02);
+cursor: pointer;background-image:url('image/help.png');"></button>
+
+<div id="helpcontent" style="display:none;">
+<h2>  Note:</h2> For the game to work properly,Reset the Game each
+  time you change the display mode from
+  Potrait to Landscape or vice versa.
+  Reset button is the button at the bottom right corner,below the pause button.
+<h1>  Level 1: Fish Fantasy</h1>
+This level test addition skills,number recognition.
+In level one, you have to tap on the object
+which you think is the correct answer to
+the question displayed on the blackboard.
+Score will be reduced for every wrong answer.
+You have only two chances to get the right answer.
+
+  <h1>  Level 2: Ocean Mania</h1>
+  This level test shape recognition skills.
+     In level two, you shoot a black fish upwards every time you tap on the screen.
+     The aim is to make the black fish collide with
+      the object which you think is the correct answer
+      to the question displayed on the blackboard
+      Score will be reduced for every wrong answer.
+
+    <h1>  Level 3: Math in Meadows</h1>
+    This is a bonus level.
+    This level requires advances math skills.It tests both addition and multiplication skills.
+      In level three, you shoot a strawberry upwards every time you tap on the screen.
+      The aim is to make the strawberry collide with
+      the object which you think is the correct answer
+      to the question displayed on the blackboard.
+      Level ends if you hit the wrong object/answer.
+  </div>
+
+
+<!-- Creates about button and displays about text-->
+  <button id="about" onclick ="AboutDialog()"
+  style="border-width: 0;
+  border-style: outset;
+  border-color: buttonface;
+  background-size: 50px 50px;
+  z-index:30;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(210, 105, 30, 0.02);
+  cursor: pointer;background-image:url('image/about.png');"></button>
+
+  <div id="aboutcontent" style="display:none;">
+
+  <h1>  Terms of Use </h1>
+    Please carefully read these terms and conditions for download, installation, display and use of the Fun Math mobile application before you download, install, display or use the Application.
+    1. Terms of Use
+    (a) By downloading, installing, displaying or using the Application, you indicate that you accept these Terms of Use and that you agree to abide by them as a legally binding agreement between you and us. Your download, installation or use of the Application constitutes your acceptance of these Terms of Use which takes effect on the date on which you download, install, display or use the Application. If you do not agree with these Terms of Use, you must cease downloading, installing, displaying or using the Application immediately.
+
+    (b) The Application is owned and operated by the Ninja Games Company. The Company reserves the right to amend modify add delete and make corrections to the Terms of Use or by updating the Application to incorporate new Terms of Use at any time without notice. All changes are effective from the date they are posted and your continued use of the Application will constitute your acceptance of the variation of the Terms of Use. It is your responsibility to ensure you are aware of any changes to these Terms of Use each time you utilize the Application.
+
+    (c) These Terms of Use also includes the terms and conditions set out below
+    	Company Privacy Policy
+      Open Source Licenses
+    	The Fun Math Mobile Application Terms of Use.
+    (d) In these Terms of Use
+
+    	the expression user you and yours refers to the person or organization accessing and using the Application;
+    	the expression we us our and the Company means the Ninja Games Company.
+
+    <h2> 2. Use of the Application and data </h2>
+     <h3> 2.1 Use </h3>
+    (a) You may download the Application, to view, use and display the Application on your mobile device for your personal use only. You may use the Application to view information and material provided by us and to access the Application. You may not use the Application for any other purpose.
+
+    (b) You acknowledge that you have no rights in, or to, the Application or technology used or support by the Application, other than the right to use the Application in accordance with the terms of this Agreement.
+
+    (c) The Application is currently available to mobile devices running the Apple iOS or Android OS. To access the Application, you must have a mobile device with paid access to a mobile phone provider. The Application is free to download however your provider's rates and fees will apply for accessing and downloading information within the Application.
+     <h3>2.2 Limitations of Use</h3>
+    You must:
+
+    (a) use the Application in accordance with these Terms of Use;
+
+    (i) not copy, transmit, distribute, reproduce, license, alter, reverse engineer, adapt or modify the whole or any part of the Application in any way whatsoever;
+    (ii) not use the Application in any unlawful manner, for any unlawful purpose, or in any manner inconsistent with this Agreement, or hacking into or inserting malicious code, destruction of data, including viruses, or harmful data, into the Application;
+    (iii) not use the Application in any way that could damage, disable, overburden, impair or compromise the Application; and
+    (iv) comply with any applicable law and regulation relating to downloading or technology used or supported by the Application.
+
+     <h3>2.3 Privacy Policy </h3>
+    The Company is committed to protecting user privacy. We understand and users of this application are concerned about their privacy and the confidentiality and security of any information that may be provided to us. We, hereby declare that we do not store, modify, adapt, inappropriately use any user data provided to us in any form.
+
+     <h3> 2.4 Updates </h3>
+    The Company may make available to you updates, upgrades of the Application including bug fixes, updates, feature improvements, enhancements or deletion to existing software after the date you obtain your initial copy of the application. This agreement applies to any and all components of the Update.
+
+    <h3> 2.5 Open Source Licences </h3>
+
+    1.about.png   From: http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+    2.alienfish.png  From: http://www.publicdomainpictures.net/view-image.php?image=160972&picture=alien-fish Person Name: Piotr Siedlecki License CC0 Public Domain
+
+    3. apple.png     From: https://pixabay.com/en/apple-red-fruit-vitamins-healthy-158419/  Person Name: OpenClipArtVectors License CC0 Public Domain
+
+    4. bb2.png,blackboard.png  From:https://pixabay.com/en/board-school-blackboard-empty-73496/  Person Name:geralt  License CC0 Public Domain
+
+    5. blackfish.png  From: https://pixabay.com/en/fish-funny-cartoon-odd-surprised-33712/ Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+    6.  bomb2.png,bomb.png From:https://pixabay.com/en/bomb-fuse-explosive-mine-grenade-147841/  Person name:OpenClipArtVectors License CC0 Public Domain
+
+    7.  end.gif  From : https://pixabay.com/en/fireball-explosion-devastation-422748/ ;https://pixabay.com/en/death-skull-stylized-158970/  Authors: geralt , OpenClipArtVectors  License CC0 Public Domain
+
+    8. gameover.png Created by myself (using Windows Paint) , prog.bot font  From : http://www.fontspace.com/divide-by-zero/progbot  Person Name : Divide by zero
+
+    9.goldfish.png From :https://pixabay.com/en/goldfish-fish-koi-carp-30837/  Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+    10. help.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+    11. home.png   From:http://opengameart.org/content/underwater-background-0 Author: Voodoo Cactus License CC3.0 Unported
+
+    12. landscape.png   From: https://pixabay.com/en/landscape-countryside-fields-nature-409551/  Author: martinme2d License CC0 Public Domain
+
+    13. lemon.png  From: https://pixabay.com/en/lemon-yellow-fruits-citrus-foods-576400/  Person name:OpenClipArtVectors License CC0 Public Domain
+
+    14. orangefish.png  From: https://pixabay.com/en/fish-gold-gold-fish-cartoon-swim-260709/   Person Name : thatteasedawn   License CC0 Public Domain
+
+    15. pause.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+    16. play.png  From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+    17. reset.png From : http://opengameart.org/content/free-bubble-game-button-pack   Author: pzUH License CC0 Public Domain
+
+    18. scr.png   From:https://pixabay.com/en/chest-coral-gold-ocean-pirate-1300163/    Author:OpenClipartVectors License CC0 Public Domain
+
+    19. seahorse.png From : https://pixabay.com/en/seahorse-fish-ocean-animal-313946/   Person Name : stef1377   License CC0 Public Domain
+
+    20. seal.png  From :https://pixabay.com/en/seal-animals-aquarium-circus-sea-161264/  Person Name : OpenClipArtVectors License CC0 Public Domain
+
+    21. seaweed.png  From : https://pixabay.com/en/seaweed-plant-algae-aquatic-32720/   Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+    22. starfish.png  From: http://www.publicdomainpictures.net/view-image.php?image=89250&picture=&jazyk=SE  Person Name : Marina Shemesh License CC0 Public Domain
+
+    23. strawberry.png   From : https://pixabay.com/en/strawberry-fruit-berry-red-food-37781/    Person Name: ClkerFreeVectorImages License CC0 Public Domain
+
+    24. tree2.png  From: https://pixabay.com/en/clip-art-flora-nature-plant-tree-1300586/  Person Name : OpenClipArtVectors License CC0 Public Domain
+
+    25. ufo.png   From: http://opengameart.org/content/ufo-enemy-game-character  Author: bevouliin License CC0 Public Domain
+
+    26. watermelon.png From:https://pixabay.com/en/fresh-refresh-summertime-watermelon-1299827/    Author:OpenClipArtVectors   License CC0 Public Domain
+
+    27. bomb_sound.mp3  From: http://soundbible.com/1983-Atomic-Bomb.html     Author: Sound Explorer License CC Attribution 3.0
+
+    28. bubble2.wav   From: http://opengameart.org/content/rpg-sound-pack    Author: artisticdude   License CC0 Public Domain
+
+    29. carnivalrides.ogg   From: http://opengameart.org/content/carnival-rides  Author: Ecrivain License CC0 Public Domain
+
+    30. flora.ogg   From:http://opengameart.org/content/yellow-flowers-and-tall-mossy-trees   Author:Ecrivain License CC0 Public Domain
+
+    31. impact.mp3  From:http://soundbible.com/1773-Strong-Punch.html   Author: Mike Koenig License CC Attribution 3.0
+
+    32. music2.ogg  From:http://opengameart.org/content/happy-synths-loop-with-slight-christmas-feeling  Author:Pant0don  License CC0 Public Domain
+
+    34. pop.ogg   From: http://opengameart.org/sites/default/files/pop.ogg   Author: farfadet46  License CC0 Public Domain
+
+    35. round_end.mp3 From: http://soundbible.com/1823-Winning-Triumphal-Fanfare.html  Author: John Stracke   License CC Attribution 3.0
+
+    36. seawaves.mp3  http://soundbible.com/885-Sea-Waves.html  Author: Mike Koenig License CC Attribution 3.0
+
+
+</div>
+
+
+</body>
+</html>
